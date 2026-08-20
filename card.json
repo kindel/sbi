@@ -6,7 +6,7 @@
   "order": 50,
   "icon": "icon.png",
   "subtitle": "Situation, Behavior, Impact",
-  "summary": "An interactive tool that structures feedback as Situation, Behavior, and Impact. You leave with words about what happened, not who they are. Useful when you owe someone feedback and the draft is still about the person.",
+  "summary": "An interactive app that structures feedback as Situation, Behavior, and Impact. You leave with words about what happened, not who they are. Useful when you owe someone feedback and the draft is still about the person.",
   "posts": [
     { "title": "The Secret to Giving Feedback Without Triggering Defensiveness", "href": "https://blog.kindel.com/2025/10/21/the-secret-to-giving-feedback-without-triggering-defensiveness/" }
   ]

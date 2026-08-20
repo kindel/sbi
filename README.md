@@ -1,6 +1,6 @@
 # sbi
 
-A coming-soon interactive tool that structures feedback as Situation, Behavior, and Impact so you leave with words about what happened, not who they are.
+A coming-soon interactive app that structures feedback as Situation, Behavior, and Impact so you leave with words about what happened, not who they are.
 
 ## The Model
 

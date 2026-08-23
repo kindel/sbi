@@ -109,3 +109,156 @@ func TestCardJSONHref(t *testing.T) {
 		t.Errorf("card.json href = %q, want /apps/sbi/", card.Href)
 	}
 }
+
+func TestTextareasHaveAccessibleNames(t *testing.T) {
+	_, body := get(t, "/")
+	textareaIDs := []string{"draft", "situation", "behavior", "impact"}
+	for _, id := range textareaIDs {
+		hasAriaLabel := strings.Contains(body, `id="`+id+`"`) &&
+			(strings.Contains(body, `<textarea id="`+id+`"`) || strings.Contains(body, `<textarea`))
+		if !hasAriaLabel {
+			t.Errorf("textarea %q not found in index.html", id)
+			continue
+		}
+		// Check for aria-label, aria-labelledby, or <label for="id">
+		hasAccessibleName := false
+		// Simple check: find the textarea tag and verify it has aria-label
+		if strings.Contains(body, `id="`+id+`"`) {
+			// Look for aria-label on the same element
+			if strings.Contains(body, `<textarea id="`+id+`"`) {
+				// Check if the line containing this textarea has aria-label
+				// Using a simple pattern match
+				pattern := `id="` + id + `"`
+				idx := strings.Index(body, pattern)
+				if idx != -1 {
+					// Find the enclosing tag
+					start := strings.LastIndex(body[:idx], "<textarea")
+					if start != -1 {
+						end := strings.Index(body[start:], ">")
+						if end != -1 {
+							tag := body[start : start+end+1]
+							if strings.Contains(tag, "aria-label=") {
+								hasAccessibleName = true
+							}
+						}
+					}
+				}
+			}
+			// Check for <label for="id">
+			if strings.Contains(body, `<label for="`+id+`"`) ||
+				strings.Contains(body, `<label for='`+id+`'`) {
+				hasAccessibleName = true
+			}
+			// Check for aria-labelledby on the textarea
+			if strings.Contains(body, `id="`+id+`"`) && strings.Contains(body, `aria-labelledby=`) {
+				pattern := `id="` + id + `"`
+				idx := strings.Index(body, pattern)
+				if idx != -1 {
+					start := strings.LastIndex(body[:idx], "<textarea")
+					if start != -1 {
+						end := strings.Index(body[start:], ">")
+						if end != -1 {
+							tag := body[start : start+end+1]
+							if strings.Contains(tag, "aria-labelledby=") {
+								hasAccessibleName = true
+							}
+						}
+					}
+				}
+			}
+		}
+		if !hasAccessibleName {
+			t.Errorf("textarea %q missing accessible name (aria-label, aria-labelledby, or <label for>)", id)
+		}
+	}
+}
+
+func TestNoEmDashesInUserFacingEnglish(t *testing.T) {
+	files := map[string]func() ([]byte, error){
+		"index.html": func() ([]byte, error) {
+			_, body := get(t, "/")
+			return []byte(body), nil
+		},
+		"app.js": func() ([]byte, error) {
+			_, body := get(t, "/app.js")
+			return []byte(body), nil
+		},
+		"README.md": func() ([]byte, error) {
+			return os.ReadFile("README.md")
+		},
+	}
+	for name, loader := range files {
+		data, err := loader()
+		if err != nil {
+			t.Errorf("cannot read %s: %v", name, err)
+			continue
+		}
+		content := string(data)
+		// Check for U+2014 (em dash) character
+		if strings.Contains(content, "\u2014") {
+			t.Errorf("%s contains em dash (U+2014)", name)
+		}
+		// Check for &mdash; HTML entity
+		if strings.Contains(content, "&mdash;") {
+			t.Errorf("%s contains &mdash; HTML entity", name)
+		}
+	}
+}
+
+func TestLintboxScrollbarGeometry(t *testing.T) {
+	data, err := os.ReadFile("static/style.css")
+	if err != nil {
+		t.Fatal("cannot read static/style.css:", err)
+	}
+	css := string(data)
+
+	// We need to verify that .lintbox .backdrop and .lintbox textarea have
+	// matching overflow-y and scrollbar-gutter settings.
+	//
+	// The fix should have a shared rule for both (or matching individual rules).
+	// We check that:
+	// 1. Both have overflow-y: auto (not hidden-only on backdrop)
+	// 2. scrollbar-gutter: stable is present
+
+	// Look for the shared rule ".lintbox .backdrop,\n.lintbox textarea"
+	hasSharedRule := strings.Contains(css, ".lintbox .backdrop,") &&
+		strings.Contains(css, ".lintbox textarea")
+
+	// Check for overflow-y: auto in the shared context
+	hasOverflowYAuto := strings.Contains(css, "overflow-y: auto")
+
+	// Check for scrollbar-gutter: stable
+	hasScrollbarGutter := strings.Contains(css, "scrollbar-gutter: stable")
+
+	// Verify backdrop does not have overflow: hidden without matching gutter
+	// Find backdrop-specific rules
+	backdropIdx := strings.Index(css, ".lintbox .backdrop {")
+	if backdropIdx != -1 {
+		// Find the end of this rule block
+		end := strings.Index(css[backdropIdx:], "}")
+		if end != -1 {
+			backdropRule := css[backdropIdx : backdropIdx+end]
+			// If backdrop has overflow: hidden, it must be in a separate rule
+			// and the shared rule must handle scrolling
+			if strings.Contains(backdropRule, "overflow: hidden") &&
+				!strings.Contains(backdropRule, "scrollbar-gutter") {
+				// This is only a problem if there's no shared rule with proper settings
+				if !hasSharedRule || !hasScrollbarGutter {
+					t.Error("backdrop uses overflow: hidden without shared scrollbar-gutter rule")
+				}
+			}
+		}
+	}
+
+	if !hasOverflowYAuto {
+		t.Error("style.css missing overflow-y: auto for lintbox textarea/backdrop")
+	}
+
+	if !hasScrollbarGutter {
+		t.Error("style.css missing scrollbar-gutter: stable for lintbox textarea/backdrop")
+	}
+
+	if !hasSharedRule {
+		t.Error("style.css should have shared rule for .lintbox .backdrop and .lintbox textarea")
+	}
+}

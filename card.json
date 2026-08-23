@@ -1,7 +1,7 @@
 {
   "id": "sbi",
   "name": "SBI",
-  "href": "/sbi/",
+  "href": "/kld/apps/sbi/",
   "status": "live",
   "order": 50,
   "icon": "icon.png",

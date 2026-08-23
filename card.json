@@ -1,8 +1,8 @@
 {
   "id": "sbi",
   "name": "SBI",
-  "href": "/sbi/",
-  "status": "later",
+  "href": "/apps/sbi/",
+  "status": "ready",
   "order": 50,
   "icon": "icon.png",
   "subtitle": "Situation, Behavior, Impact",

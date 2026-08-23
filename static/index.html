@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SBI: Situation, Behavior, Impact</title>
+<meta name="description" content="Structure feedback as Situation, Behavior, and Impact. Leave with words about what happened, not who they are.">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>SBI</h1>
+  <p class="tagline">You owe someone feedback and the draft is still about the person.
+  Rebuild it as <strong>Situation</strong>, <strong>Behavior</strong>, and <strong>Impact</strong>.
+  Words about what happened, not who they are.</p>
+</header>
+
+<main>
+  <section class="step" id="step-draft">
+    <h2><span class="stepnum">1</span> Start with what you'd actually say</h2>
+    <p class="hint">Vent here. Nothing you type leaves this page. The highlights show
+    where the draft is about the person instead of what happened.</p>
+    <div class="lintbox">
+      <div class="backdrop" aria-hidden="true"></div>
+      <textarea id="draft" rows="4" spellcheck="false" aria-label="Draft feedback"
+        placeholder="Alex was rude and unprofessional in the meeting. He never listens and clearly doesn't care about the team."></textarea>
+    </div>
+    <ul class="flags" id="flags-draft" aria-live="polite"></ul>
+  </section>
+
+  <section class="step" id="step-situation">
+    <h2><span class="stepnum">2</span> Situation</h2>
+    <p class="hint">When and where. Specific enough to jog memory without debate:
+    a date, a meeting, a document.</p>
+    <div class="lintbox">
+      <div class="backdrop" aria-hidden="true"></div>
+      <textarea id="situation" rows="2" spellcheck="false" aria-label="Situation"
+        placeholder="During our team meeting on Tuesday at 10 a.m.…"></textarea>
+    </div>
+    <ul class="flags" id="flags-situation" aria-live="polite"></ul>
+  </section>
+
+  <section class="step" id="step-behavior">
+    <h2><span class="stepnum">3</span> Behavior</h2>
+    <p class="hint">What you saw or heard. Actions, not intent. A camera could have
+    recorded it.</p>
+    <div class="lintbox">
+      <div class="backdrop" aria-hidden="true"></div>
+      <textarea id="behavior" rows="3" spellcheck="false" aria-label="Behavior"
+        placeholder="…you raised your voice and interrupted Maya twice before she finished her proposal."></textarea>
+    </div>
+    <ul class="flags" id="flags-behavior" aria-live="polite"></ul>
+  </section>
+
+  <section class="step" id="step-impact">
+    <h2><span class="stepnum">4</span> Impact</h2>
+    <p class="hint">The effect on you, others, or the work. Say it from your side:
+    “I noticed…”, “It cost us…”.</p>
+    <div class="lintbox">
+      <div class="backdrop" aria-hidden="true"></div>
+      <textarea id="impact" rows="3" spellcheck="false" aria-label="Impact"
+        placeholder="Maya stopped contributing, and we ended the meeting without her read on the launch risk."></textarea>
+    </div>
+    <ul class="flags" id="flags-impact" aria-live="polite"></ul>
+  </section>
+
+  <section class="step result" id="step-result">
+    <h2><span class="stepnum">5</span> Say this</h2>
+    <blockquote id="script"><span class="placeholder">Your feedback appears here as you fill in the three parts.</span></blockquote>
+    <label class="intent-toggle">
+      <input type="checkbox" id="intent" checked>
+      End by asking about intent. It turns a statement into a conversation.
+    </label>
+    <div class="actions">
+      <button id="copy" type="button" disabled>Copy</button>
+      <span id="copied" role="status"></span>
+    </div>
+    <details>
+      <summary>Before you deliver it</summary>
+      <ul>
+        <li>Soon and in private. Feedback ages badly.</li>
+        <li>Say the three parts, ask the intent question, then stop talking.</li>
+        <li>This works for praise too. Positive SBI notes become the evidence in a promotion case.</li>
+      </ul>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <p>Nothing you type leaves this page. No server, no storage, no account.</p>
+  <p>The SBI model comes from the <a href="https://www.ccl.org/">Center for Creative Leadership</a>.
+  Read <a href="https://blog.kindel.com/2025/10/21/the-secret-to-giving-feedback-without-triggering-defensiveness/">why it works</a>.</p>
+  <p>MIT © 2026 Kindel, LLC · <a href="https://kindel.com">kindel.com</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

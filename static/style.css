@@ -1,0 +1,194 @@
+:root {
+  --bg: #fdfdfb;
+  --ink: #1c2a33;
+  --muted: #5c6b76;
+  --accent: #1a6a7a;
+  --card: #ffffff;
+  --border: #dde4e8;
+  --mark-label: #fbd3d0;
+  --mark-praise: #fde8b8;
+  --mark-intent: #e3d4f5;
+  --mark-absolute: #fbd3d0;
+  --mark-vague: #fde8b8;
+  --ok: #2c7a4b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14191d;
+    --ink: #e6ebee;
+    --muted: #9aa8b1;
+    --accent: #6bc2d2;
+    --card: #1c2329;
+    --border: #313c44;
+    --mark-label: #6e3230;
+    --mark-praise: #6b5620;
+    --mark-intent: #4d3a68;
+    --mark-absolute: #6e3230;
+    --mark-vague: #6b5620;
+    --ok: #6fce97;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+  max-width: 44rem;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+}
+
+.tagline { color: var(--muted); max-width: 38rem; }
+.tagline strong { color: var(--ink); }
+
+.step { margin-top: 2.5rem; }
+
+.step h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.stepnum {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hint { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.95rem; }
+
+/* Textarea with a highlight layer behind it. The backdrop holds the same
+   text with <mark> spans; its text is transparent so only the marks show. */
+.lintbox { position: relative; }
+
+.lintbox .backdrop,
+.lintbox textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.lintbox .backdrop {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background: var(--card);
+  border-color: transparent;
+  pointer-events: none;
+}
+
+.lintbox textarea {
+  position: relative;
+  display: block;
+  background: transparent;
+  color: inherit;
+  resize: vertical;
+  min-height: 3.4rem;
+}
+
+.lintbox textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.backdrop mark { border-radius: 3px; color: transparent; }
+.backdrop mark.label    { background: var(--mark-label); }
+.backdrop mark.praise   { background: var(--mark-praise); }
+.backdrop mark.intent   { background: var(--mark-intent); }
+.backdrop mark.absolute { background: var(--mark-absolute); }
+.backdrop mark.vague    { background: var(--mark-vague); }
+
+.flags {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+
+.flags li { margin: 0.35rem 0; color: var(--muted); }
+.flags li.ok { color: var(--ok); }
+
+.flags .chip {
+  display: inline-block;
+  padding: 0 0.4rem;
+  margin-right: 0.45rem;
+  border-radius: 4px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.flags .chip.label    { background: var(--mark-label); }
+.flags .chip.praise   { background: var(--mark-praise); }
+.flags .chip.intent   { background: var(--mark-intent); }
+.flags .chip.absolute { background: var(--mark-absolute); }
+.flags .chip.vague    { background: var(--mark-vague); }
+
+.result blockquote {
+  margin: 0 0 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--card);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  white-space: pre-wrap;
+}
+
+.result .placeholder { color: var(--muted); font-style: italic; }
+
+.intent-toggle {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.actions { display: flex; align-items: center; gap: 0.75rem; }
+
+button {
+  font: inherit;
+  padding: 0.45rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  cursor: pointer;
+}
+button:disabled { opacity: 0.45; cursor: default; }
+
+#copied { color: var(--ok); font-size: 0.92rem; }
+
+details { margin-top: 1.25rem; color: var(--muted); font-size: 0.95rem; }
+details summary { cursor: pointer; color: var(--ink); }
+
+footer {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+a { color: var(--accent); }

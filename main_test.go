@@ -105,8 +105,8 @@ func TestCardJSONHref(t *testing.T) {
 	if err := json.Unmarshal(data, &card); err != nil {
 		t.Fatalf("card.json parse error: %v", err)
 	}
-	if card.Href != "/apps/sbi/" {
-		t.Errorf("card.json href = %q, want /apps/sbi/", card.Href)
+	if card.Href != "/sbi/" {
+		t.Errorf("card.json href = %q, want /sbi/", card.Href)
 	}
 }
 

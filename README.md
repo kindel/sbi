@@ -18,9 +18,19 @@ Most people already know they are not perfect and have behaviors they can change
 
 It works for praise as well as correction. Positive SBI examples become the evidence in a promotion case. A trail of SBI notes replaces gut feel in a review.
 
-## Status
+## The App
 
-Coming soon. The teaching page will live at https://kindel.com/sbi/. This repo will be the app when it exists.
+A single page that turns a vent into something you can say out loud. Paste the draft you'd actually deliver; the app highlights judgment words, mind-reading, absolutes, and vague timing, and explains why each one weakens the feedback. Then rebuild it in three guided fields — Situation, Behavior, Impact — assemble the script, and end with the intent question. Copy it and go say it.
+
+Nothing you type leaves the page. No server-side logic, no storage, no account.
+
+### Running
+
+```sh
+go run .
+```
+
+Then open http://localhost:8080. The app is the static files under `static/`, embedded into the binary; asset paths are relative so it also hosts under a prefix like https://kindel.com/sbi/.
 
 ## Teaching
 

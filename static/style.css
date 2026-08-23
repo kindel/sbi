@@ -89,15 +89,17 @@ header h1 {
   line-height: 1.55;
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .lintbox .backdrop {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   color: transparent;
   background: var(--card);
   border-color: transparent;
+  pointer-events: none;
 }
 
 .lintbox textarea {

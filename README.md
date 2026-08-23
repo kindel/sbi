@@ -1,6 +1,6 @@
 # sbi
 
-A coming-soon interactive app that structures feedback as Situation, Behavior, and Impact so you leave with words about what happened, not who they are.
+An interactive app that structures feedback as Situation, Behavior, and Impact so you leave with words about what happened, not who they are.
 
 ## The Model
 
@@ -20,17 +20,21 @@ It works for praise as well as correction. Positive SBI examples become the evid
 
 ## The App
 
-A single page that turns a vent into something you can say out loud. Paste the draft you'd actually deliver; the app highlights judgment words, mind-reading, absolutes, and vague timing, and explains why each one weakens the feedback. Then rebuild it in three guided fields — Situation, Behavior, Impact — assemble the script, and end with the intent question. Copy it and go say it.
+A single page that turns a vent into something you can say out loud. Paste the draft you'd actually deliver; the app highlights judgment words, mind-reading, absolutes, and vague timing and explains why each one weakens the feedback. Then rebuild it in three guided fields (Situation, Behavior, Impact), assemble the script, and end with the intent question. Copy it and go say it.
 
 Nothing you type leaves the page. No server-side logic, no storage, no account.
 
-### Running
+### Running locally
 
 ```sh
 go run .
 ```
 
-Then open http://localhost:8080. The app is the static files under `static/`, embedded into the binary; asset paths are relative so it also hosts under a prefix like https://kindel.com/sbi/.
+Open http://localhost:8080. The app is the static files under `static/`, embedded into the binary; asset paths are relative so it works at the root locally and under a path prefix in production.
+
+### Canonical path
+
+The public URL is https://kindel.com/apps/sbi/. Legacy aliases `/sbi/` and `/tools/sbi/` also work.
 
 ## Teaching
 

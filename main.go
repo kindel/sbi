@@ -2,7 +2,8 @@
 //
 // The app itself is static: everything under static/ is embedded into the
 // binary and no request data is read or stored. Asset paths in the HTML are
-// relative so the app works at / locally and under /sbi/ behind a proxy.
+// relative so the app works at / locally and under a prefix (e.g. /apps/sbi/)
+// behind a proxy.
 package main
 
 import (

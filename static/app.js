@@ -39,7 +39,7 @@ const RULES = [
   },
   {
     cat: "vague",
-    msg: "Specific enough to jog memory without debate \u2014 a date, a meeting, a document.",
+    msg: "Specific enough to jog memory without debate: a date, a meeting, a document.",
     phrases: [
       "recently", "last week", "the other day", "a while ago",
       "a while back", "lately", "sometimes", "often", "in general",
@@ -113,7 +113,7 @@ function renderFlags(list, text, flags) {
   if (flags.length === 0 && text.trim() !== "") {
     const li = document.createElement("li");
     li.className = "ok";
-    li.textContent = "\u2713 No judgment words \u2014 this is about what happened.";
+    li.textContent = "\u2713 No judgment words. This is about what happened.";
     list.appendChild(li);
   }
 }
@@ -174,7 +174,7 @@ document.getElementById("copy").addEventListener("click", async () => {
     await navigator.clipboard.writeText(text);
     copied.textContent = "Copied. Say it soon, in private.";
   } catch {
-    copied.textContent = "Couldn't copy \u2014 select the text above instead.";
+    copied.textContent = "Couldn't copy; select the text above instead.";
   }
   setTimeout(() => {
     copied.textContent = "";

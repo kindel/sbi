@@ -38,7 +38,7 @@ The public URL is https://kindel.com/apps/sbi/. Legacy aliases `/sbi/` and `/too
 
 ## Teaching
 
-- [The Secret to Giving Feedback Without Triggering Defensiveness](https://blog.kindel.com/2025/10/21/the-secret-to-giving-feedback-without-triggering-defensiveness/)
+- [The Secret to Giving Feedback Without Triggering Defensiveness](https://kindel.com/essays/the-secret-to-giving-feedback-without-triggering-defensiveness/)
 
 ## Related
 
